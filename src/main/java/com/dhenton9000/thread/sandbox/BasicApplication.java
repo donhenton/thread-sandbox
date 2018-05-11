@@ -1,5 +1,6 @@
 package com.dhenton9000.thread.sandbox;
 
+import com.dhenton9000.future.demo.FutureAggregator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,30 +15,31 @@ import org.springframework.context.event.EventListener;
 @SpringBootApplication
 public class BasicApplication {
 
-    
     @Value("${app}")
     private String app;
-    
+
     private final static Logger LOG
             = LoggerFactory.getLogger(BasicApplication.class);
 
     public static void main(String[] args) {
-        
-         ConfigurableApplicationContext contextVar
+
+        ConfigurableApplicationContext contextVar
                 = SpringApplication.run(BasicApplication.class, args);
         contextVar.getBean(BasicApplication.class).beginApplication();
     }
-    
-    
+
     @EventListener(ApplicationReadyEvent.class)
     public void doSomethingAfterStartup() {
         LOG.debug("hello world, I have just started up");
     }
 
     private void beginApplication() {
-        LOG.debug("app is "+app);
+        LOG.debug("app is " + app);
+        if (app.equals("agg")) {
+            FutureAggregator agg = new FutureAggregator();
+            agg.doAggregate();
+        }
+
     }
-    
-    
-    
+
 }
