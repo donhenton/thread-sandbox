@@ -1,6 +1,7 @@
 package com.dhenton9000.thread.sandbox;
 
-import com.dhenton9000.future.demo.FutureAggregator;
+import com.dhenton9000.demo.agg.FutureAggregator;
+import com.dhenton9000.demo.loop1.SingleLoopDemoOne;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -35,9 +36,14 @@ public class BasicApplication {
 
     private void beginApplication() {
         LOG.debug("app is " + app);
+        
         if (app.equals("agg")) {
             FutureAggregator agg = new FutureAggregator();
             agg.doAggregate();
+        }
+        if (app.equals("loop1")) {
+            SingleLoopDemoOne demo = new SingleLoopDemoOne();
+            demo.doDemo();
         }
 
     }

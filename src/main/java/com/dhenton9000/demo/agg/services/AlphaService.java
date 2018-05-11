@@ -4,25 +4,25 @@
  * and open the template in the editor.
  */
 
-package com.dhenton9000.future.demo.services;
+package com.dhenton9000.demo.agg.services;
 
 /**
  *
  * @author dhenton
  */
-public class GammaService extends BaseService {
+public class AlphaService extends BaseService {
 
     
       
 
     @Override
     public long setDelay() {
-         return 300L;
+         return 1500L;
     }
 
     @Override
     public String getInfo() {
-       return "gamma ";
+       return "alpha ";
     }
     
 }

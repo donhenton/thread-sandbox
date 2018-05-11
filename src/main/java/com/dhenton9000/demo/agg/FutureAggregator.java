@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.dhenton9000.future.demo;
+package com.dhenton9000.demo.agg;
 //http://java.dzone.com/articles/javautilconcurrentfuture
 
-import com.dhenton9000.future.demo.services.AlphaService;
-import com.dhenton9000.future.demo.services.BetaService;
-import com.dhenton9000.future.demo.services.GammaService;
-import com.dhenton9000.future.demo.services.IService;
+import com.dhenton9000.demo.agg.services.AlphaService;
+import com.dhenton9000.demo.agg.services.BetaService;
+import com.dhenton9000.demo.agg.services.GammaService;
+import com.dhenton9000.demo.agg.services.IService;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
@@ -18,6 +18,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
+import java.util.logging.Level;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -58,6 +60,8 @@ public class FutureAggregator {
         }// end for services loop
         String totalString = "";
         // this says you are loaded, now do your thing
+        // the gets below will 'keep looking' until they are down
+
         executor.shutdown();
         try {
             if (!executor.awaitTermination(60, TimeUnit.SECONDS)) {
@@ -70,15 +74,25 @@ public class FutureAggregator {
             LOG.error("Couldn't shut down thread pool", ex);
             executor.shutdownNow();
             Thread.currentThread().interrupt();
+        } finally {
+            if (!executor.isTerminated()) {
+                LOG.error("cancel non-finished tasks");
+            }
+            executor.shutdownNow();
+            LOG.info("shutdown finished");
         }
 
+        // The gets block so use a timeout
         for (Future<String> f : futures) {
             try {
-                totalString += f.get();
+                //  totalString += f.get();
+                totalString += f.get(200, TimeUnit.MILLISECONDS);
             } catch (InterruptedException ex) {
                 LOG.error("interrupt ex on get " + ex.getMessage());
             } catch (ExecutionException ex) {
                 LOG.error("Exceution ex on get " + ex.getMessage());
+            } catch (TimeoutException ex) {
+                LOG.error("Timeout ex on get " + ex.getMessage());
             }
         }
 

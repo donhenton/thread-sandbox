@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.dhenton9000.future.demo.services;
+package com.dhenton9000.demo.agg.services;
 
-import com.dhenton9000.future.demo.FutureAggregator;
+import com.dhenton9000.demo.agg.FutureAggregator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
