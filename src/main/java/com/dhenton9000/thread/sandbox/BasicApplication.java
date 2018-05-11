@@ -1,6 +1,9 @@
 package com.dhenton9000.thread.sandbox;
 
 import com.dhenton9000.demo.agg.FutureAggregator;
+import com.dhenton9000.demo.aref.AtomicRefDemo;
+import com.dhenton9000.demo.atomic.AtomicDemo;
+import com.dhenton9000.demo.hash.ConcurrentHashMapDemo;
 import com.dhenton9000.demo.loop1.SingleLoopDemoOne;
 import com.dhenton9000.demo.sync1.SyncOneDemo;
 import org.slf4j.Logger;
@@ -50,8 +53,20 @@ public class BasicApplication {
             DemoApp demo = new SingleLoopDemoOne();
             demo.doDemo();
         }
-         if (app.equals("sync1")) {
+        if (app.equals("sync1")) {
             DemoApp demo = new SyncOneDemo();
+            demo.doDemo();
+        }
+        if (app.equals("atomic")) {
+            DemoApp demo = new AtomicDemo();
+            demo.doDemo();
+        }
+        if (app.equals("aref")) {
+            DemoApp demo = new AtomicRefDemo();
+            demo.doDemo();
+        }
+        if (app.equals("hash")) {
+            DemoApp demo = new ConcurrentHashMapDemo();
             demo.doDemo();
         }
     }

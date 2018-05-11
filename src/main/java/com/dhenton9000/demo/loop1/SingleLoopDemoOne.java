@@ -25,6 +25,7 @@ public class SingleLoopDemoOne implements DemoApp{
     private static final Logger LOG = LoggerFactory.getLogger(SingleLoopDemoOne.class);
     private int ct = 0;
     
+    @Override
     public void doDemo() {
         ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
         DemoTask dTask = new DemoTask();
