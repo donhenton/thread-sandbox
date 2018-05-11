@@ -1,6 +1,7 @@
 package com.dhenton9000.demo.loop1;
 
  
+import com.dhenton9000.thread.sandbox.DemoApp;
 import com.dhenton9000.thread.sandbox.ThreadUtils;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
@@ -18,7 +19,7 @@ import org.slf4j.LoggerFactory;
  * @author dhenton  
  */
 
-public class SingleLoopDemoOne {
+public class SingleLoopDemoOne implements DemoApp{
 
     
     private static final Logger LOG = LoggerFactory.getLogger(SingleLoopDemoOne.class);

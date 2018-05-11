@@ -1,5 +1,3 @@
- 
-
 package com.dhenton9000.thread.sandbox;
 
 import java.util.concurrent.ExecutorService;
@@ -7,16 +5,12 @@ import java.util.concurrent.TimeUnit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
- 
 public class ThreadUtils {
 
-    
-    
     private final static Logger LOG
             = LoggerFactory.getLogger(ThreadUtils.class);
-    
-    
-        public static void shutdownAndAwaitTermination(ExecutorService pool) {
+
+    public static void shutdownAndAwaitTermination(ExecutorService pool) {
         LOG.info("running the cancel routine");
         pool.shutdown(); // Disable new tasks from being submitted
         try {
@@ -27,11 +21,10 @@ public class ThreadUtils {
                 if (!pool.awaitTermination(1, TimeUnit.SECONDS)) {
                     LOG.error("Pool did not terminate");
                 }
-                
-                
+
             }
-           System.exit(-2);
-           
+            System.exit(-2);
+
         } catch (InterruptedException ie) {
             // (Re-)Cancel if current thread also interrupted
             pool.shutdownNow();
@@ -39,8 +32,27 @@ public class ThreadUtils {
             Thread.currentThread().interrupt();
         }
     }
-    
-    
-    
-    
+
+    public static void stop(ExecutorService executor) {
+        try {
+            executor.shutdown();
+            executor.awaitTermination(60, TimeUnit.SECONDS);
+        } catch (InterruptedException e) {
+            System.err.println("termination interrupted");
+        } finally {
+            if (!executor.isTerminated()) {
+                System.err.println("killing non-finished tasks");
+            }
+            executor.shutdownNow();
+        }
+    }
+
+    public static void sleep(int seconds) {
+        try {
+            TimeUnit.SECONDS.sleep(seconds);
+        } catch (InterruptedException e) {
+            throw new IllegalStateException(e);
+        }
+    }
+
 }

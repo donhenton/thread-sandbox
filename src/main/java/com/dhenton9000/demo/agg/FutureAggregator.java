@@ -10,6 +10,7 @@ import com.dhenton9000.demo.agg.services.AlphaService;
 import com.dhenton9000.demo.agg.services.BetaService;
 import com.dhenton9000.demo.agg.services.GammaService;
 import com.dhenton9000.demo.agg.services.IService;
+import com.dhenton9000.thread.sandbox.DemoApp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
@@ -27,7 +28,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author dhenton
  */
-public class FutureAggregator {
+public class FutureAggregator implements DemoApp {
 
     IService alphaService = new AlphaService();
     IService betaService = new BetaService();
@@ -43,7 +44,7 @@ public class FutureAggregator {
 
     }
 
-    public void doAggregate() {
+    public void doDemo() {
         ExecutorService executor = Executors.newFixedThreadPool(services.size());
         for (final IService service : services) {
 
@@ -98,5 +99,5 @@ public class FutureAggregator {
 
         LOG.info("\nFinished with\n" + totalString);
 
-    }// end doAggregate
+    }// end doDemo
 }

@@ -2,6 +2,7 @@ package com.dhenton9000.thread.sandbox;
 
 import com.dhenton9000.demo.agg.FutureAggregator;
 import com.dhenton9000.demo.loop1.SingleLoopDemoOne;
+import com.dhenton9000.demo.sync1.SyncOneDemo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -36,16 +37,23 @@ public class BasicApplication {
 
     private void beginApplication() {
         LOG.debug("app is " + app);
-        
+
         if (app.equals("agg")) {
-            FutureAggregator agg = new FutureAggregator();
-            agg.doAggregate();
+            DemoApp agg = new FutureAggregator();
+            agg.doDemo();
         }
         if (app.equals("loop1")) {
-            SingleLoopDemoOne demo = new SingleLoopDemoOne();
+            DemoApp demo = new SingleLoopDemoOne();
             demo.doDemo();
         }
-
+        if (app.equals("loop1")) {
+            DemoApp demo = new SingleLoopDemoOne();
+            demo.doDemo();
+        }
+         if (app.equals("sync1")) {
+            DemoApp demo = new SyncOneDemo();
+            demo.doDemo();
+        }
     }
 
 }
