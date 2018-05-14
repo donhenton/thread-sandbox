@@ -1,7 +1,9 @@
 package com.dhenton9000.demo.dead;
 
 // http://www.codejava.net/java-core/concurrency/java-synchronization-tutorial-part-1-the-problems-of-unsynchronized-code
+import com.dhenton9000.demo.dead.bank.Transaction;
 import com.dhenton9000.demo.dead.bank.Bank;
+import com.dhenton9000.demo.dead.bank.DeadLockBank;
 import com.dhenton9000.demo.dead.bank.LockBank;
 import com.dhenton9000.demo.dead.bank.UnSyncedBank;
 import com.dhenton9000.thread.sandbox.DemoApp;
@@ -24,6 +26,7 @@ public class DeadLockDemo implements DemoApp {
     private String actionType = null;
     private final Bank unSyncedBank = new UnSyncedBank(NUMBER_OF_ACCTS);
     private final Bank lockBank = new LockBank(NUMBER_OF_ACCTS);
+    private final Bank deadLockBank = new DeadLockBank(NUMBER_OF_ACCTS);
 
     public DeadLockDemo(String actionType) {
 
@@ -54,9 +57,12 @@ public class DeadLockDemo implements DemoApp {
             if (this.actionType.equals("lock")) {
                  selectedItem = new Transaction(lockBank, i);
             }
+            if (this.actionType.equals("freeze")) {
+                 selectedItem = new Transaction(deadLockBank, i);
+            }
 
             if (selectedItem == null) {
-                throw new RuntimeException("parm must be 'lock' or 'show'");
+                throw new RuntimeException("parm must be 'lock,show,freeze'");
             }
             ScheduledFuture<?> readScheduledItem
                     = executor.scheduleAtFixedRate(selectedItem, 0, 1, TimeUnit.MILLISECONDS);

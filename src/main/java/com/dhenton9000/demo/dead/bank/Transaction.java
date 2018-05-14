@@ -1,5 +1,6 @@
-package com.dhenton9000.demo.dead;
+package com.dhenton9000.demo.dead.bank;
 
+import com.dhenton9000.demo.dead.DeadLockDemo;
 import com.dhenton9000.demo.dead.bank.Bank;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,7 +29,7 @@ public class Transaction implements Runnable {
            //     return;
            // }
 
-            int amount = (int) (Math.random() * Bank.MAX_AMOUNT);
+            int amount = (int) (Math.random() * this.bank.getMaxAmount());
 
            // if (amount == 0) {
            //     return;

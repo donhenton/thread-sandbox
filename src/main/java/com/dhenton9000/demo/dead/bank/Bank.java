@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
  * @author www.codejava.net
  */
 public abstract class Bank {
-    public static final int MAX_AMOUNT = 100;
+    private static final int MAX_AMOUNT = 10;
     public static final int INITIAL_BALANCE = 100;
     private final static Logger LOG
             = LoggerFactory.getLogger(Bank.class);
@@ -29,8 +29,12 @@ public abstract class Bank {
     }
 
     public abstract String transfer(int from, int to, int amount) ;
+    
+    protected int getMaxAmount() {
+        return MAX_AMOUNT;
+    }
 
-    protected int getTotalBalance() {
+    protected final int getTotalBalance() {
         int total = 0;
 
         for (Account account : getAccounts()) {
@@ -43,7 +47,7 @@ public abstract class Bank {
     /**
      * @return the accounts
      */
-    protected Account[] getAccounts() {
+    protected final Account[] getAccounts() {
         return accounts;
     }
 
@@ -54,7 +58,7 @@ public abstract class Bank {
         return expectedBalance;
     }
     
-    public void setExpectedBalance(int i) {
+    public final void setExpectedBalance(int i) {
         this.expectedBalance = i;
     }
 }

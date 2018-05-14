@@ -15,7 +15,7 @@
 * hash - concurrenthashmap demo
 * vol - voliate keyword demo
 * join1 - simple join demo
-* dead - deadlock demo (parm1=show parm1=lock)  ./launch deadklock show
+* dead - deadlock demo (parm1=show parm1=lock, parm1=freeze)  ./launch deadklock show
 
 
 
