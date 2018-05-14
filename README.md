@@ -1,7 +1,7 @@
 # Launching demos 
 
 ```
-./launch demo1
+./launch demo1 parm1
 ```
 
 ## Current Demos
@@ -15,10 +15,12 @@
 * hash - concurrenthashmap demo
 * vol - voliate keyword demo
 * join1 - simple join demo
+* dead - deadlock demo (parm1=show parm1=lock)  ./launch deadklock show
 
 
 
 # References
 * http://winterbe.com/posts/2015/04/07/java8-concurrency-tutorial-thread-executor-examples/
+* http://www.codejava.net/java-core/concurrency/understanding-deadlock-livelock-and-starvation-with-code-examples-in-java
+* https://www.callicoder.com/java-concurrency-multithreading-basics
 
-https://www.callicoder.com/java-concurrency-multithreading-basics/

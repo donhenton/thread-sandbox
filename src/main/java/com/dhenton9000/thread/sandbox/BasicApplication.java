@@ -3,6 +3,7 @@ package com.dhenton9000.thread.sandbox;
 import com.dhenton9000.demo.agg.FutureAggregator;
 import com.dhenton9000.demo.aref.AtomicRefDemo;
 import com.dhenton9000.demo.atomic.AtomicDemo;
+import com.dhenton9000.demo.dead.DeadLockDemo;
 import com.dhenton9000.demo.hash.ConcurrentHashMapDemo;
 import com.dhenton9000.demo.loop1.SingleLoopDemoOne;
 import com.dhenton9000.demo.simple.join.SimpleJoinDemo;
@@ -24,6 +25,9 @@ public class BasicApplication {
 
     @Value("${app}")
     private String app;
+    
+    @Value("${parm}")
+    private String parm;
 
     private final static Logger LOG
             = LoggerFactory.getLogger(BasicApplication.class);
@@ -42,6 +46,7 @@ public class BasicApplication {
 
     private void beginApplication() {
         LOG.debug("app is " + app);
+        LOG.debug("parm is " + parm);
 
         if (app.equals("agg")) {
             DemoApp agg = new FutureAggregator();
@@ -77,6 +82,10 @@ public class BasicApplication {
         }
         if (app.equals("join1")) {
             DemoApp demo = new SimpleJoinDemo();
+            demo.doDemo();
+        }
+        if (app.equals("deadlock")) {
+            DemoApp demo = new DeadLockDemo(parm);
             demo.doDemo();
         }
     }
