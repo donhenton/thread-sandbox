@@ -4,18 +4,20 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class ReaderTask implements Runnable {
 
-    private final ConcurrentHashMap<Integer, String> map;
+    private final Map<Integer, String> map;
     private final String name;
     private static final Logger LOG = LoggerFactory.getLogger(ReaderTask.class);
     private final LocalDateTime start;
 
-    public ReaderTask(ConcurrentHashMap<Integer, String> map, String threadName,LocalDateTime start) {
+    public ReaderTask(Map<Integer, String> map, String threadName,LocalDateTime start) {
         this.map = map;
         this.name = threadName;
         this.start = start;
@@ -25,7 +27,7 @@ public class ReaderTask implements Runnable {
     @Override
     public void run() {
 
-        ConcurrentHashMap.KeySetView<Integer, String> keySetView = map.keySet();
+        Set<Integer> keySetView = map.keySet();
         Iterator<Integer> iterator = keySetView.iterator();
         LocalDateTime current = LocalDateTime.now();
         Duration diff = Duration.between( this.start,current);

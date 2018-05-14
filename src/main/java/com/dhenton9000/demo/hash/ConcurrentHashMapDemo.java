@@ -4,7 +4,9 @@ import com.dhenton9000.thread.sandbox.DemoApp;
 import static com.dhenton9000.thread.sandbox.ThreadUtils.shutdownAndAwaitTermination;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
@@ -22,13 +24,16 @@ import org.slf4j.LoggerFactory;
 public class ConcurrentHashMapDemo implements DemoApp {
 
     private static final Logger LOG = LoggerFactory.getLogger(ConcurrentHashMapDemo.class);
-    private final ConcurrentHashMap<Integer, String> mainMap = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<Integer, String> safeMap = new ConcurrentHashMap<>();
+    private final HashMap<Integer, String> unsafeMap = new HashMap<>();
     private final LocalDateTime start = LocalDateTime.now();
 
     @Override
     public void doDemo() {
         ScheduledExecutorService executor = Executors.newScheduledThreadPool(5);
         List<ScheduledFuture> futures = new ArrayList<>();
+        Map<Integer,String> mainMap =  safeMap;
+      //  Map<Integer,String> mainMap = unsafeMap;
 
         //Reader Tasks
         for (int i = 0; i < 3; i++) {

@@ -2,6 +2,7 @@ package com.dhenton9000.demo.hash;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ThreadLocalRandom;
@@ -10,12 +11,12 @@ import org.slf4j.LoggerFactory;
 
 public class WriterTask implements Runnable {
 
-    private final ConcurrentMap<Integer, String> map;
+    private final Map<Integer, String> map;
     private final String name;
     private static final Logger LOG = LoggerFactory.getLogger(WriterTask.class);
     private final LocalDateTime start;
 
-    public WriterTask(ConcurrentMap<Integer, String> map, String name, LocalDateTime start) {
+    public WriterTask(Map<Integer, String> map, String name, LocalDateTime start) {
         this.map = map;
         this.name = name;
         this.start = start;
