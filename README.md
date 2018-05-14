@@ -13,7 +13,12 @@
 * atomic - atomic vars and concurrenthashmap
 * aref - atomic ref demo
 * hash - concurrenthashmap demo
+* vol - voliate keyword demo
+* join1 - simple join demo
+
 
 
 # References
 * http://winterbe.com/posts/2015/04/07/java8-concurrency-tutorial-thread-executor-examples/
+
+https://www.callicoder.com/java-concurrency-multithreading-basics/

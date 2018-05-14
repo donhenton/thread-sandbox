@@ -5,7 +5,9 @@ import com.dhenton9000.demo.aref.AtomicRefDemo;
 import com.dhenton9000.demo.atomic.AtomicDemo;
 import com.dhenton9000.demo.hash.ConcurrentHashMapDemo;
 import com.dhenton9000.demo.loop1.SingleLoopDemoOne;
+import com.dhenton9000.demo.simple.join.SimpleJoinDemo;
 import com.dhenton9000.demo.sync1.SyncOneDemo;
+import com.dhenton9000.demo.vol.VoliatleDemo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -67,6 +69,14 @@ public class BasicApplication {
         }
         if (app.equals("hash")) {
             DemoApp demo = new ConcurrentHashMapDemo();
+            demo.doDemo();
+        }
+        if (app.equals("vol")) {
+            DemoApp demo = new VoliatleDemo();
+            demo.doDemo();
+        }
+        if (app.equals("join1")) {
+            DemoApp demo = new SimpleJoinDemo();
             demo.doDemo();
         }
     }
